@@ -2,6 +2,24 @@
 
 Dated log of editorial passes and verification runs. Newest first.
 
+## 2026-06-04 — publish
+
+Scope: publication to the institute web surface (writing-pipeline §6-7).
+
+Changes:
+  - metadata.yaml: `date: "June 2026"`, `status: published`.
+  - `papers sync`: copied `paper/PAPER.pdf` to the web app at
+    `public/papers/mixture-of-experimenters.pdf`.
+  - `papers web-entry`: added the `ownPapers` object to the web app
+    `app/papers/page.tsx` (topics `['computer-science']`, kinds
+    `['simulation','formal']`), as the June 2026 entry.
+  - tooling `README.md` index: added the paper under June 2026; count 12 papers,
+    9 published.
+
+Verification: `papers check` => PASS, including `web OK` (deployed PDF hash
+matches the local build). 9 pages, 0 missing-char warnings, voice 0 errors,
+claim-ledger 8 verification files.
+
 ## 2026-06-04 — scope extensions (invariance experiment + attribution generalization)
 
 Scope: two additions requested after the pivot.
