@@ -1,0 +1,100 @@
+{
+  "experiment": "H2_substrate_collateral",
+  "hypothesis": "At matched on-target gain, sparse-substrate interventions have lower off-target collateral and smaller off-manifold drift than dense raw-residual interventions.",
+  "pass_criterion": "paired (sparse - dense) off-target L1 CI95 upper < 0",
+  "passed": false,
+  "target_gain": 1.2,
+  "k_sparse": 8,
+  "sae_stats": {
+    "fvu": 0.0013917336473241448,
+    "l0": 115.05928039550781,
+    "n_features": 256
+  },
+  "n_eval": 2500,
+  "by_operator": {
+    "dense": {
+      "alpha": 7.160607576370239,
+      "on_target_gain": {
+        "mean": 1.200000035762787,
+        "ci_lo": 1.1690944714677334,
+        "ci_hi": 1.2309309174895287,
+        "n": 2500
+      },
+      "off_target_l1": {
+        "mean": 4.968310124063492,
+        "ci_lo": 4.895539927836657,
+        "ci_hi": 5.0411683203482625,
+        "n": 2500
+      },
+      "selectivity": {
+        "mean": 0.2508235866650939,
+        "ci_lo": 0.24451296561013905,
+        "ci_hi": 0.2571759537136555,
+        "n": 2500
+      },
+      "mahal_increase": {
+        "mean": 0.16826735984681965,
+        "ci_lo": 0.1655713167516672,
+        "ci_hi": 0.17105598951162057,
+        "n": 2500
+      }
+    },
+    "sparse": {
+      "alpha": 8.939040899276733,
+      "on_target_gain": {
+        "mean": 1.1999999785423279,
+        "ci_lo": 1.1664948846256733,
+        "ci_hi": 1.233285413558483,
+        "n": 2500
+      },
+      "off_target_l1": {
+        "mean": 6.687868398761749,
+        "ci_lo": 6.576336921155453,
+        "ci_hi": 6.798821432354449,
+        "n": 2500
+      },
+      "selectivity": {
+        "mean": 0.19815768087357283,
+        "ci_lo": 0.19149748716546688,
+        "ci_hi": 0.20492919645899904,
+        "n": 2500
+      },
+      "mahal_increase": {
+        "mean": 0.3914970268107136,
+        "ci_lo": 0.3811820302917927,
+        "ci_hi": 0.4020947328863493,
+        "n": 2500
+      }
+    },
+    "blunt": {
+      "on_target_gain": {
+        "mean": -0.2557214552223682,
+        "ci_lo": -0.2638525792875886,
+        "ci_hi": -0.24761857346579433,
+        "n": 2500
+      },
+      "off_target_l1": {
+        "mean": 9.514468841171265,
+        "ci_lo": 9.421600064964295,
+        "ci_hi": 9.606977113547325,
+        "n": 2500
+      },
+      "note": "random direction at dense's norm; reported as the non-targeted floor"
+    }
+  },
+  "sparse_minus_dense_off_l1": {
+    "mean": 1.7195582746982574,
+    "ci_lo": 1.6233141093027592,
+    "ci_hi": 1.8146441550016403,
+    "frac_a_gt_b": 0.7808,
+    "n": 2500
+  },
+  "sparse_minus_dense_mahal": {
+    "mean": 0.22322966696389393,
+    "ci_lo": 0.2132867986247034,
+    "ci_hi": 0.23340394283587088,
+    "frac_a_gt_b": 0.8224,
+    "n": 2500
+  },
+  "interpretation": "If PASS: a factored substrate buys surgical locality, supporting the 'do not experiment in the raw residual stream' design. If FAIL: the SAE is not clean enough to beat the raw direction, which is itself the Heap et al. (2025) caution about over-trusting SAE locality."
+}

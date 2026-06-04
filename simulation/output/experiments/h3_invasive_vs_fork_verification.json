@@ -1,0 +1,39 @@
+{
+  "experiment": "H3_invasive_vs_fork",
+  "hypothesis": "A persisted (invasive) edit fixes the immediate answer and degrades the next answer that attends over it; a non-invasive fork fixes the immediate answer without degrading the horizon.",
+  "pass_criterion": "invasive d_acc1 CI95>0; invasive d_acc2 CI95<0; fork d_acc2 CI95 upper >= invasive d_acc2 upper",
+  "passed": true,
+  "edit_layer": 0,
+  "scale": 117.69239044189453,
+  "n_eval": 4000,
+  "acc": {
+    "baseline_a1": 0.7900000214576721,
+    "baseline_a2": 0.715749979019165,
+    "invasive_a1": 0.999750018119812,
+    "invasive_a2": 0.7114999890327454,
+    "fork_a1": 0.999750018119812,
+    "fork_a2": 0.715749979019165
+  },
+  "invasive_d_acc1": {
+    "mean": 0.20975,
+    "ci_lo": 0.19725,
+    "ci_hi": 0.2225,
+    "frac_a_gt_b": 0.20975,
+    "n": 4000
+  },
+  "invasive_d_acc2": {
+    "mean": -0.00425,
+    "ci_lo": -0.006756249999999994,
+    "ci_hi": -0.00175,
+    "frac_a_gt_b": 0.00125,
+    "n": 4000
+  },
+  "fork_d_acc2": {
+    "mean": 0.0,
+    "ci_lo": 0.0,
+    "ci_hi": 0.0,
+    "frac_a_gt_b": 0.0,
+    "n": 4000
+  },
+  "interpretation": "If PASS: writing an intervention into the live stream buys the near token at the cost of the horizon, the KV-contamination failure; a fork-and-select avoids it. This is the case for non-invasive experimentation."
+}

@@ -1,0 +1,49 @@
+{
+  "experiment": "C3_attribution_pythia160m",
+  "hypothesis": "With the evidence found by causal leave-one-out rather than given, the swap signal survives (stays above chance); the cost of imperfect attribution versus known evidence is the quantity of interest.",
+  "pass_criterion": "attributed swap AUROC CI95 lower bound > 0.5",
+  "passed": true,
+  "model": "EleutherAI/pythia-160m",
+  "n_examples": 400,
+  "n_pairs": 6,
+  "attribution_accuracy": 0.48750001192092896,
+  "signal": "g_swap",
+  "auroc": {
+    "attributed_swap": 0.6829439434496738,
+    "known_swap": 0.757296187530861,
+    "entropy": 0.7194963486577094
+  },
+  "auroc_ci": {
+    "attributed_swap": {
+      "auroc": 0.6829439434496738,
+      "ci_lo": 0.6254832657604448,
+      "ci_hi": 0.7385721361153532,
+      "n": 400
+    },
+    "known_swap": {
+      "auroc": 0.757296187530861,
+      "ci_lo": 0.7082019177440331,
+      "ci_hi": 0.8049029912378511,
+      "n": 400
+    },
+    "entropy": {
+      "auroc": 0.7194963486577094,
+      "ci_lo": 0.667026715368958,
+      "ci_hi": 0.7709915862270393,
+      "n": 400
+    }
+  },
+  "attributed_minus_entropy": {
+    "diff": -0.0365524052080356,
+    "ci_lo": -0.10547220229467666,
+    "ci_hi": 0.03039252495171267,
+    "n": 400
+  },
+  "attributed_minus_known": {
+    "diff": -0.07435224408118724,
+    "ci_lo": -0.12941370155105392,
+    "ci_hi": -0.020306660383797512,
+    "n": 400
+  },
+  "interpretation": "The swap signal survives self-attribution (AUROC well above chance) but, at the attribution accuracy this small model supplies, no longer beats entropy and trails the known-evidence signal significantly. The bottleneck for generalization is evidence attribution, not the experiment: where the evidence is located accurately the signal is strong, and self-attribution on a weak model is the lossy step."
+}

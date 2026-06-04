@@ -1,0 +1,109 @@
+{
+  "experiment": "H5_offmanifold",
+  "hypothesis": "Oracle-selected interventions drift off the natural activation manifold; a Mahalanobis penalty cuts the drift while retaining the accuracy gain.",
+  "pass_criterion": "(a) lambda=0 selected mean Mahalanobis CI95 above baseline; (b) some lambda*>0 with \u0394acc-vs-base CI95>0 and \u0394mahal-vs-lambda0 CI95<0",
+  "passed": true,
+  "baseline_acc": 0.8347499966621399,
+  "baseline_mean_mahal": 8.1093599403464,
+  "alpha": 252.38582611083984,
+  "n_eval": 4000,
+  "drift_real_vs_baseline": {
+    "mean": 14.075472596043733,
+    "ci_lo": 14.038015185984658,
+    "ci_hi": 14.113129251378428,
+    "frac_a_gt_b": 1.0,
+    "n": 4000
+  },
+  "lambda_star": {
+    "lambda": 0.25,
+    "d_acc_vs_base": {
+      "mean": 0.16525,
+      "ci_lo": 0.15375,
+      "ci_hi": 0.17675,
+      "frac_a_gt_b": 0.16525,
+      "n": 4000
+    },
+    "d_mahal_vs_lam0": {
+      "mean": -7.047579399586152,
+      "ci_lo": -7.273455923007253,
+      "ci_hi": -6.818704844357577,
+      "frac_a_gt_b": 0.0,
+      "n": 4000
+    }
+  },
+  "sweep": {
+    "lambda_0.0": {
+      "acc": 1.0,
+      "mean_mahal": 22.184832536390132,
+      "d_acc_vs_base": {
+        "mean": 0.16525,
+        "ci_lo": 0.15375,
+        "ci_hi": 0.17675,
+        "frac_a_gt_b": 0.16525,
+        "n": 4000
+      },
+      "frac_null": 0.0
+    },
+    "lambda_0.25": {
+      "acc": 1.0,
+      "mean_mahal": 15.13725313680398,
+      "d_acc_vs_base": {
+        "mean": 0.16525,
+        "ci_lo": 0.15375,
+        "ci_hi": 0.17675,
+        "frac_a_gt_b": 0.16525,
+        "n": 4000
+      },
+      "frac_null": 0.47875
+    },
+    "lambda_0.5": {
+      "acc": 0.9940000176429749,
+      "mean_mahal": 10.896755050254756,
+      "d_acc_vs_base": {
+        "mean": 0.15925,
+        "ci_lo": 0.148,
+        "ci_hi": 0.1705,
+        "frac_a_gt_b": 0.15925,
+        "n": 4000
+      },
+      "frac_null": 0.78325
+    },
+    "lambda_1.0": {
+      "acc": 0.9020000100135803,
+      "mean_mahal": 8.919940316707198,
+      "d_acc_vs_base": {
+        "mean": 0.06725,
+        "ci_lo": 0.0595,
+        "ci_hi": 0.07525,
+        "frac_a_gt_b": 0.06725,
+        "n": 4000
+      },
+      "frac_null": 0.9325
+    },
+    "lambda_2.0": {
+      "acc": 0.8372499942779541,
+      "mean_mahal": 8.13587072408576,
+      "d_acc_vs_base": {
+        "mean": 0.0025,
+        "ci_lo": 0.001,
+        "ci_hi": 0.00425,
+        "frac_a_gt_b": 0.0025,
+        "n": 4000
+      },
+      "frac_null": 0.9975
+    },
+    "lambda_4.0": {
+      "acc": 0.8347499966621399,
+      "mean_mahal": 8.1093599403464,
+      "d_acc_vs_base": {
+        "mean": 0.0,
+        "ci_lo": 0.0,
+        "ci_hi": 0.0,
+        "frac_a_gt_b": 0.0,
+        "n": 4000
+      },
+      "frac_null": 1.0
+    }
+  },
+  "interpretation": "If PASS: off-manifold drift is a real cost even when the scorer is correct, and a cheap manifold penalty buys most of the gain back at lower drift. This is the concrete form of the 'stay on the model's manifold' constraint."
+}

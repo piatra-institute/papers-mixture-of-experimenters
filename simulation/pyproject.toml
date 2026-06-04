@@ -1,0 +1,14 @@
+[project]
+name = "mox-sim"
+version = "0.1.0"
+description = "Mixture of Experimenters — test-time residual-stream experimentation toy"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy>=1.26",
+    "torch>=2.2",
+    "scipy>=1.11",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["mox*"]

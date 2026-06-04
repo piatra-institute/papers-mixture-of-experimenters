@@ -1,0 +1,130 @@
+{
+  "experiment": "C1_controlled_experiments",
+  "hypothesis": "A control-corrected internal experiment gives a label-free correctness signal that beats the same uncontrolled intervention and beats entropy/margin; it is competitive with a supervised probe.",
+  "pass_criterion": "controlled mixture AUROC exceeds entropy, margin, and the best uncontrolled single-intervention probe (all paired CI95>0)",
+  "passed": true,
+  "baseline_acc": 0.8335999846458435,
+  "n_eval": 5000,
+  "auroc": {
+    "g_swap": 0.9042406429942419,
+    "g_ablate": 0.9436496186604901,
+    "g_invariance": 0.7548926170548501,
+    "g_mixture": 0.955897093699247,
+    "g_mixture3": 0.9665817515318175,
+    "swap_uncontrolled": 0.9037642569762292,
+    "ablate_uncontrolled": 0.9276927056418869,
+    "neg_entropy": 0.785682235530784,
+    "margin": 0.784106153338624,
+    "probe_supervised": 0.6018425065517496
+  },
+  "auroc_ci": {
+    "g_swap": {
+      "auroc": 0.9042406429942419,
+      "ci_lo": 0.8925151961752662,
+      "ci_hi": 0.9152498529289074,
+      "n": 5000
+    },
+    "g_ablate": {
+      "auroc": 0.9436496186604901,
+      "ci_lo": 0.9360240005903502,
+      "ci_hi": 0.9509146326175574,
+      "n": 5000
+    },
+    "g_invariance": {
+      "auroc": 0.7548926170548501,
+      "ci_lo": 0.7331549881686265,
+      "ci_hi": 0.7764588114408294,
+      "n": 5000
+    },
+    "g_mixture": {
+      "auroc": 0.955897093699247,
+      "ci_lo": 0.9493035781150967,
+      "ci_hi": 0.9621611848580303,
+      "n": 5000
+    },
+    "g_mixture3": {
+      "auroc": 0.9665817515318175,
+      "ci_lo": 0.9607203537259581,
+      "ci_hi": 0.9720219052237814,
+      "n": 5000
+    },
+    "swap_uncontrolled": {
+      "auroc": 0.9037642569762292,
+      "ci_lo": 0.892079354525571,
+      "ci_hi": 0.9149191691319305,
+      "n": 5000
+    },
+    "ablate_uncontrolled": {
+      "auroc": 0.9276927056418869,
+      "ci_lo": 0.919230089796674,
+      "ci_hi": 0.935506250434728,
+      "n": 5000
+    },
+    "neg_entropy": {
+      "auroc": 0.785682235530784,
+      "ci_lo": 0.7678217631035059,
+      "ci_hi": 0.8029982618392861,
+      "n": 5000
+    },
+    "margin": {
+      "auroc": 0.784106153338624,
+      "ci_lo": 0.7665088864810946,
+      "ci_hi": 0.801269838675787,
+      "n": 5000
+    },
+    "probe_supervised": {
+      "auroc": 0.6018425065517496,
+      "ci_lo": 0.5802313957369802,
+      "ci_hi": 0.6234195124073996,
+      "n": 5000
+    }
+  },
+  "c1a_swap_controlled_minus_uncontrolled": {
+    "diff": 0.00047638601801269775,
+    "ci_lo": -0.004296859892220955,
+    "ci_hi": 0.00530523949829531,
+    "n": 5000
+  },
+  "c1a_ablate_controlled_minus_uncontrolled": {
+    "diff": 0.015956913018603247,
+    "ci_lo": 0.010051357094688023,
+    "ci_hi": 0.022282569177126656,
+    "n": 5000
+  },
+  "c1b_mixture_minus_entropy": {
+    "diff": 0.17021485816846305,
+    "ci_lo": 0.1503744500158148,
+    "ci_hi": 0.19102146761515099,
+    "n": 5000
+  },
+  "c1b_mixture_minus_margin": {
+    "diff": 0.17179094036062303,
+    "ci_lo": 0.1521133143154271,
+    "ci_hi": 0.19168914363740763,
+    "n": 5000
+  },
+  "c1b_mixture_minus_best_uncontrolled": {
+    "diff": 0.02820438805736014,
+    "ci_lo": 0.020779908024394073,
+    "ci_hi": 0.03576747120542206,
+    "n": 5000
+  },
+  "c1c_mixture_minus_supervised_probe": {
+    "diff": 0.3540545871474974,
+    "ci_lo": 0.3315290810229239,
+    "ci_hi": 0.3773442981755885,
+    "n": 5000
+  },
+  "c1d_threeway_minus_twoway_mixture": {
+    "diff": 0.010684657832570443,
+    "ci_lo": 0.0065522969286229745,
+    "ci_hi": 0.014868434469051594,
+    "n": 5000
+  },
+  "checks": {
+    "c1b_beats_labelfree_and_uncontrolled": true,
+    "control_needed_for_ablation": true,
+    "control_inert_for_swap": true
+  },
+  "interpretation": "Controlled internal experiments, which ask whether the answer is causally grounded in its evidence, give a label-free correctness signal far stronger than entropy, margin, or a supervised probe. The matched control is necessary where the intervention has a non-specific component (ablation) and inert where the intervention is intrinsically specific (the counterfactual swap): a control matters exactly when there is generic perturbation-sensitivity to cancel."
+}

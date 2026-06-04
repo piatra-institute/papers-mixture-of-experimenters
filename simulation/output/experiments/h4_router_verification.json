@@ -1,0 +1,64 @@
+{
+  "experiment": "H4_router",
+  "hypothesis": "A method-diverse mixture beats the best single experimenter only on a mixed-failure population; on a pure population the router collapses to one experimenter and the mixture adds nothing. A deployable entropy router recovers most of the mixture gain.",
+  "pass_criterion": "H4a mixture-minus-best-single CI95>0 (mixed); H4b router_frac_to_retr>0.9 and mixture-minus-retr CI95 contains 0 (pure); H4c routed-minus-best-single CI95>0 (mixed)",
+  "passed": false,
+  "alpha": 252.38582611083984,
+  "mixed": {
+    "tag": "mixed",
+    "n": 6000,
+    "frac_retrieval_actual": 0.507,
+    "acc": {
+      "base": 0.7236666679382324,
+      "expert_retr": 0.8108333349227905,
+      "expert_par": 0.9125000238418579,
+      "mixture": 0.999666690826416,
+      "routed_entropy": 0.8108333333333333,
+      "routed_oracle": 0.9996666666666667
+    },
+    "router_frac_to_retr": 0.9996666666666667,
+    "router_accuracy_vs_subtask": 0.507
+  },
+  "retrieval_only": {
+    "tag": "retrieval_only",
+    "n": 6000,
+    "frac_retrieval_actual": 1.0,
+    "acc": {
+      "base": 0.8330000042915344,
+      "expert_retr": 1.0,
+      "expert_par": 0.8330000042915344,
+      "mixture": 1.0,
+      "routed_entropy": 1.0,
+      "routed_oracle": 1.0
+    },
+    "router_frac_to_retr": 0.9993333333333333,
+    "router_accuracy_vs_subtask": 0.9993333333333333
+  },
+  "h4a_mixture_vs_best_single_mixed": {
+    "mean": 0.08716666666666667,
+    "ci_lo": 0.08,
+    "ci_hi": 0.0945,
+    "frac_a_gt_b": 0.08716666666666667,
+    "n": 6000
+  },
+  "h4b_mixture_vs_retr_pure": {
+    "mean": 0.0,
+    "ci_lo": 0.0,
+    "ci_hi": 0.0,
+    "frac_a_gt_b": 0.0,
+    "n": 6000
+  },
+  "h4c_routed_vs_best_single_mixed": {
+    "mean": -0.10166666666666667,
+    "ci_lo": -0.115,
+    "ci_hi": -0.0885,
+    "frac_a_gt_b": 0.08716666666666667,
+    "n": 6000
+  },
+  "checks": {
+    "h4a": true,
+    "h4b": true,
+    "h4c": false
+  },
+  "interpretation": "If PASS: routing buys epistemic value only when the input population genuinely mixes failure types; a single well-matched experimenter is otherwise as good, and the router correctly collapses to it."
+}

@@ -1,0 +1,88 @@
+{
+  "experiment": "C2_realmodel_pythia160m",
+  "hypothesis": "On Pythia-160M in-context retrieval, the controlled-experiment mixture beats entropy and the best uncontrolled probe at discriminating correct answers, without labels.",
+  "pass_criterion": "mixture minus entropy AUROC CI95>0 and mixture minus margin AUROC CI95>0",
+  "passed": true,
+  "model": "EleutherAI/pythia-160m",
+  "n_examples": 400,
+  "n_pairs": 6,
+  "baseline_acc": 0.4025,
+  "auroc": {
+    "g_swap": 0.7572182229267912,
+    "g_ablate": 0.8172379739598222,
+    "g_mixture": 0.8416019127316199,
+    "swap_uncontrolled": 0.7711089165518854,
+    "ablate_uncontrolled": 0.8114815873593388,
+    "neg_entropy": 0.7200680890875543,
+    "margin": 0.7189765846305777
+  },
+  "auroc_ci": {
+    "g_swap": {
+      "auroc": 0.7572182229267912,
+      "ci_lo": 0.7085631015539883,
+      "ci_hi": 0.8047828824869792,
+      "n": 400
+    },
+    "g_ablate": {
+      "auroc": 0.8172379739598222,
+      "ci_lo": 0.7746924050952573,
+      "ci_hi": 0.8591604045782738,
+      "n": 400
+    },
+    "g_mixture": {
+      "auroc": 0.8416019127316199,
+      "ci_lo": 0.8010774662691587,
+      "ci_hi": 0.8789714700193424,
+      "n": 400
+    },
+    "swap_uncontrolled": {
+      "auroc": 0.7711089165518854,
+      "ci_lo": 0.7227329440266097,
+      "ci_hi": 0.8168107578216297,
+      "n": 400
+    },
+    "ablate_uncontrolled": {
+      "auroc": 0.8114815873593388,
+      "ci_lo": 0.7681229264155531,
+      "ci_hi": 0.8521699475564338,
+      "n": 400
+    },
+    "neg_entropy": {
+      "auroc": 0.7200680890875543,
+      "ci_lo": 0.6686303809845235,
+      "ci_hi": 0.7703737823047603,
+      "n": 400
+    },
+    "margin": {
+      "auroc": 0.7189765846305777,
+      "ci_lo": 0.66770575774618,
+      "ci_hi": 0.7676076726537032,
+      "n": 400
+    }
+  },
+  "mixture_minus_entropy": {
+    "diff": 0.12153382364406562,
+    "ci_lo": 0.0665792855174314,
+    "ci_hi": 0.17626111669098882,
+    "n": 400
+  },
+  "mixture_minus_margin": {
+    "diff": 0.12262532810104221,
+    "ci_lo": 0.0690818039815256,
+    "ci_hi": 0.177123046875,
+    "n": 400
+  },
+  "mixture_minus_best_uncontrolled": {
+    "diff": 0.030120325372281043,
+    "ci_lo": -0.010447148251089252,
+    "ci_hi": 0.07008962789125366,
+    "n": 400
+  },
+  "ablate_control_minus_uncontrolled": {
+    "diff": 0.0057563866004833875,
+    "ci_lo": -0.03174143410895241,
+    "ci_hi": 0.04215108635947515,
+    "n": 400
+  },
+  "interpretation": "If PASS: the controlled internal experiment is not an artifact of the toy. On a real model it yields a label-free correctness signal stronger than entropy, confirming the mechanism at a realistic width."
+}

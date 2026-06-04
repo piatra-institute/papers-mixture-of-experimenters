@@ -1,0 +1,106 @@
+{
+  "experiment": "H1_scorer_goodhart",
+  "hypothesis": "An oracle scorer over latent steering interventions lifts accuracy; entropy/margin scorers lift confidence without accuracy (Goodhart); a learned probe sits between.",
+  "pass_criterion": "oracle d_acc CI95>0; entropy d_conf CI95>0 and d_acc CI95 upper<=0.005; margin d_acc CI95 upper<=0.005",
+  "passed": true,
+  "baseline_acc": 0.8447499871253967,
+  "baseline_mean_conf": 0.9611181020736694,
+  "n_candidates": 7,
+  "alpha": 252.38582611083984,
+  "n_eval": 4000,
+  "model_eval": {
+    "acc": 0.7242500185966492,
+    "acc_retrieval": 0.8342798352241516,
+    "acc_parity": 0.6209403872489929,
+    "n_retrieval": 1937,
+    "n_parity": 2063
+  },
+  "by_scorer": {
+    "oracle": {
+      "acc": 1.0,
+      "mean_conf": 0.9999943375587463,
+      "mean_entropy": 8.253096893895417e-05,
+      "frac_null_selected": 0.0,
+      "d_acc": {
+        "mean": 0.15525,
+        "ci_lo": 0.144,
+        "ci_hi": 0.16675,
+        "frac_a_gt_b": 0.15525,
+        "n": 4000
+      },
+      "d_conf": {
+        "mean": 0.038876269027590754,
+        "ci_lo": 0.035760559772327546,
+        "ci_hi": 0.04201452465765178,
+        "frac_a_gt_b": 0.98525,
+        "n": 4000
+      }
+    },
+    "entropy": {
+      "acc": 0.5042499899864197,
+      "mean_conf": 0.9999975562095642,
+      "mean_entropy": 3.950734389945865e-05,
+      "frac_null_selected": 0.00525,
+      "d_acc": {
+        "mean": -0.3405,
+        "ci_lo": -0.35625,
+        "ci_hi": -0.32474375000000005,
+        "frac_a_gt_b": 0.02025,
+        "n": 4000
+      },
+      "d_conf": {
+        "mean": 0.03887942174077034,
+        "ci_lo": 0.03576373920813203,
+        "ci_hi": 0.042017817676812404,
+        "frac_a_gt_b": 0.9945,
+        "n": 4000
+      }
+    },
+    "margin": {
+      "acc": 0.5992500185966492,
+      "mean_conf": 0.9999973773956299,
+      "mean_entropy": 4.260105561115779e-05,
+      "frac_null_selected": 0.00575,
+      "d_acc": {
+        "mean": -0.2455,
+        "ci_lo": -0.26025,
+        "ci_hi": -0.23075,
+        "frac_a_gt_b": 0.02075,
+        "n": 4000
+      },
+      "d_conf": {
+        "mean": 0.03887925073504448,
+        "ci_lo": 0.03576356931552291,
+        "ci_hi": 0.042017648854851715,
+        "frac_a_gt_b": 0.992,
+        "n": 4000
+      }
+    },
+    "probe": {
+      "acc": 0.16699999570846558,
+      "mean_conf": 0.9999896287918091,
+      "mean_entropy": 0.00013558492355514318,
+      "frac_null_selected": 0.0,
+      "d_acc": {
+        "mean": -0.67775,
+        "ci_lo": -0.69375,
+        "ci_hi": -0.6615,
+        "frac_a_gt_b": 0.02475,
+        "n": 4000
+      },
+      "d_conf": {
+        "mean": 0.03887147557735443,
+        "ci_lo": 0.03575590428821743,
+        "ci_hi": 0.04201025772877037,
+        "frac_a_gt_b": 0.9155,
+        "n": 4000
+      }
+    }
+  },
+  "checks": {
+    "oracle_helps": true,
+    "entropy_goodhart": true,
+    "margin_no_acc_gain": true
+  },
+  "interpretation": "If PASS: the bottleneck of test-time residual experimentation is the scoring function, not the intervention. The achievable gain (oracle) is real but unreachable by label-free proxies, which buy confidence at no accuracy and so mis-rank candidate interventions."
+}
