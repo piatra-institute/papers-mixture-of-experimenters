@@ -2,6 +2,24 @@
 
 Dated log of editorial passes and verification runs. Newest first.
 
+## 2026-06-13 — voice reform
+
+Voice-reform pass for AI-writing tells. No number, equation, table value, or citation touched.
+
+Syntax warns fixed (all four inline-contrastives rewritten with "rather than" / positive form):
+- Abstract: "selected for conditional compute, not an agent that runs experiments" → "…a compute path rather than an agent that runs experiments."
+- §2: "it intervenes to test a claim, not to impose one" → "…to test a claim rather than to impose one."
+- §5: "evidence attribution, not the experiment: where…" → "evidence attribution rather than the experiment itself: where…"
+- §7 (former Limitations): "that identification step, not the experiment, is the main obstacle" → "that identification step is the main obstacle…, and the experiment itself is not."
+
+Structure: folded the bolt-on "7. Limitations" into "6. Discussion" (two paragraphs appended under a "Two boundaries follow from how the construction is built" lead) and renumbered "8. Conclusion" → "7. Conclusion". The formulaic-skeleton advisory now clears. Cross-references to Section 3 and Section 5 are unaffected (those sections kept their numbers).
+
+Density (closing section): replaced pet-vocab "it earns its cost exactly when" → "it repays its cost when". The remaining "exactly when …" uses are substantive scope-conditions the paper proves (a control is required exactly when the intervention is non-specific); left intact.
+
+Lexical-density advisory: before exactly 6, precisely 1, genuinely 1, earns 1; tricolon proxy 17. After exactly 5, precisely 1, genuinely 1, earns 0; tricolon proxy 16.
+
+Verify: voice 0 errors / 0 warns; structure advisory cleared; build OK, 0 missing-character warnings; claim-ledger intact (8 verification files); check => PASS.
+
 ## 2026-06-04 — publish
 
 Scope: publication to the institute web surface (writing-pipeline §6-7).

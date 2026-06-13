@@ -9,8 +9,8 @@ date: June 2026
 ## Abstract
 
 The word "expert" in mixture-of-experts is a fossil. A contemporary expert is a
-routed feed-forward subnetwork selected for conditional compute, not an agent
-that runs experiments. We take the older sense of the word seriously and ask
+routed feed-forward subnetwork selected for conditional compute, a compute path
+rather than an agent that runs experiments. We take the older sense of the word seriously and ask
 what it would mean for a language model to run an experiment on itself. The
 recent wave of test-time activation steering does not qualify: steering pushes
 the residual stream toward a chosen answer, which presupposes the conclusion. A
@@ -89,8 +89,8 @@ shift adaptive: a trained verifier decides the steering strength per step (Nguye
 et al., 2026), a condition vector gates whether to steer at all (Lee et al.,
 2025), and sparse-autoencoder coordinates localise the shift (Bayat et al., 2025).
 These optimise task behaviour by moving toward a target. The present work moves
-in the opposite epistemic direction: it intervenes to test a claim, not to impose
-one, and its output is a correctness signal rather than a steered generation.
+in the opposite epistemic direction: it intervenes to test a claim rather than to
+impose one, and its output is a correctness signal rather than a steered generation.
 
 **Confidence and faithfulness signals.** Token-level confidence (entropy, logit
 margin) and self-reported confidence are weak and miscalibrated on exactly the
@@ -258,7 +258,7 @@ but below both the known-evidence swap ($0.757$, a significant gap of
 $[-0.129, -0.020]$) and entropy ($0.719$). The signal survives self-attribution,
 but the margin that lets it beat confidence requires the evidence to be located
 accurately, which a small model supplies only imperfectly. The bottleneck for
-generalisation is evidence attribution, not the experiment: where the evidence is
+generalisation is evidence attribution rather than the experiment itself: where the evidence is
 known the experiment is strong, and self-attribution is the lossy step.
 
 ## 6. Discussion
@@ -293,16 +293,15 @@ types fail on different items. This is the sense in which a mixture of
 experimenters is more than one experimenter: not a routing of compute, but a
 panel of independent interrogations of the same claim.
 
-## 7. Limitations
-
-The experiments require knowing which evidence an answer should depend on. The
-generalisation result of Section 5 makes this concrete and quantifies its cost:
-when the evidence is found by causal leave-one-out rather than given, the signal
-survives but its advantage over confidence erodes in proportion to the attribution
-quality, which on a small model is only $0.488$. For unstructured questions the
-evidence would have to be identified more reliably, by stronger attribution or by
-the model's own citation of its sources; that identification step, not the
-experiment, is the main obstacle to a general-purpose deployment.
+Two boundaries follow from how the construction is built. The experiments require
+knowing which evidence an answer should depend on. The generalisation result of
+Section 5 makes this concrete and quantifies its cost: when the evidence is found
+by causal leave-one-out rather than given, the signal survives but its advantage
+over confidence erodes in proportion to the attribution quality, which on a small
+model is only $0.488$. For unstructured questions the evidence would have to be
+identified more reliably, by stronger attribution or by the model's own citation
+of its sources; that identification step is the main obstacle to a general-purpose
+deployment, and the experiment itself is not.
 
 The evaluation is discrimination of correct from incorrect answers by AUROC, the
 right metric for a label-free signal, but a deployed abstention system also needs
@@ -315,7 +314,7 @@ unsupervised z-score sum; a richer aggregation, and additional experiment types
 such as paraphrase-invariance and re-derivation, are natural extensions the
 construction admits but that are not evaluated here.
 
-## 8. Conclusion
+## 7. Conclusion
 
 A mixture of experimenters, read literally, is a panel of answer-agnostic
 experiments run inside the model. Each intervenes on the evidence a claim depends
@@ -325,7 +324,7 @@ with AUROC $0.956$ on a toy with known ground truth and $0.841$ on Pythia-160M,
 in both cases far above the confidence signals (entropy, margin) and above a
 supervised probe. The reason is that grounding and confidence are different
 quantities, and grounding is the one that tracks correctness. The control is what
-makes an intervention an experiment, and it earns its cost exactly when the
+makes an intervention an experiment, and it repays its cost when the
 intervention is non-specific. Extending the panel to richer experiment types and
 to settings where the relevant evidence must first be identified is the natural
 continuation.
