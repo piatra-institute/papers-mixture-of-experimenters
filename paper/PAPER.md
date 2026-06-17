@@ -34,7 +34,7 @@ it, though the margin then narrows with attribution quality. The matched control
 intervention has a non-specific component (ablation, where it adds AUROC
 $+0.016$, CI95 $[+0.010, +0.022]$) and inert where the intervention is
 intrinsically specific (a counterfactual swap, $+0.000$), so a control matters
-exactly when there is generic perturbation-sensitivity to cancel. The
+when there is generic perturbation-sensitivity to cancel. The
 contribution is a new primitive, an experiment rather than a steer, and the
 finding that whether an answer survives intervention on its own evidence is a far
 stronger label-free signal of correctness than how confident the model is.
@@ -93,7 +93,7 @@ in the opposite epistemic direction: it intervenes to test a claim rather than t
 impose one, and its output is a correctness signal rather than a steered generation.
 
 **Confidence and faithfulness signals.** Token-level confidence (entropy, logit
-margin) and self-reported confidence are weak and miscalibrated on exactly the
+margin) and self-reported confidence are weak and miscalibrated on the
 cases that matter, confident errors (Kadavath et al., 2022). Perturbation-stability
 methods train a classifier on the response of hidden states to noise
 (Khanmohammadi et al., 2025); counterfactual and consistency methods probe
@@ -204,13 +204,13 @@ $[+0.007, +0.015]$. A differently shaped experiment, a should-not-move test
 beside the two does-it-respond tests, contributes discrimination the others miss,
 which is the sense in which a mixture of experimenters is more than one.
 
-The role of the control is precise. For the ablation experiment the control is
+The role of the control is conditional. For the ablation experiment the control is
 necessary: the controlled signal beats the same intervention without a control by
 AUROC $[+0.010, +0.022]$, because corrupting any value token has a generic effect
 on the output that the control removes. For the swap experiment the control is
 inert, $[-0.004, +0.005]$, because swapping a value the answer does not use barely
 moves the output, so there is nothing for the control to cancel. A control
-matters exactly when the intervention has a non-specific component, and the
+matters when the intervention has a non-specific component, and the
 mixture, which beats the best uncontrolled single experiment by $[+0.021, +0.036]$,
 inherits the benefit where it exists.
 
@@ -263,13 +263,13 @@ known the experiment is strong, and self-attribution is the lossy step.
 
 ## 6. Discussion
 
-Confidence and grounding come apart precisely on the cases that matter. Entropy
+Confidence and grounding come apart on the cases that matter. Entropy
 and margin measure how peaked the model's distribution is, which is high both
 when the model is right and when it is confidently wrong, so they discriminate
 correctness only weakly (AUROC near $0.78$ on the toy, $0.72$ on Pythia). A
 controlled experiment measures something else: whether the answer is a function
 of the evidence it should depend on. A confident wrong answer that does not track
-its evidence is exactly what the experiment exposes and what confidence misses.
+its evidence is what the experiment exposes and what confidence misses.
 This is why a label-free causal probe beats not only the label-free confidence
 signals but a supervised correctness probe.
 
@@ -279,8 +279,8 @@ depended on what was changed, and that this region of the network is sensitive t
 any change of that kind. The matched control estimates and removes the second.
 Its value is therefore conditional, large for interventions with a strong generic
 component such as ablation, negligible for interventions that are already specific
-such as the counterfactual swap. The honest statement is not that every
-experiment needs a control, but that a control is required exactly when the
+such as the counterfactual swap. It is not that every
+experiment needs a control, but that a control is required when the
 intervention is non-specific, and that running it is the safe default because
 specificity cannot be assumed in advance.
 
