@@ -27,17 +27,24 @@ construction, in a regime of controlled uncertainty, the aggregated signal
 separates correct from incorrect answers with AUROC $0.967$ for a three-experiment
 mixture ($0.956$ for two), against $0.786$ for negative entropy, $0.784$ for logit
 margin, and $0.602$ for a logistic correctness probe trained on labelled
-activations. The same construction transfers to Pythia-160M on in-context
-retrieval, where it reaches AUROC $0.841$ against $0.719$ for entropy, and it
-survives identifying the evidence by causal attribution rather than being given
-it, though the margin then narrows with attribution quality. The matched control is necessary where the
-intervention has a non-specific component (ablation, where it adds AUROC
-$+0.016$, CI95 $[+0.010, +0.022]$) and inert where the intervention is
-intrinsically specific (a counterfactual swap, $+0.000$), so a control matters
-when there is generic perturbation-sensitivity to cancel. The
+activations. The comparison is not between supervision and its absence. The
+experiment runs three to five counterfactual forward passes and watches the
+output move under each, whereas the probe is a single-pass readout of one frozen
+activation, so the gap measures the value of interventional access over a static
+readout rather than the uselessness of labels. The same construction transfers to
+Pythia-160M on in-context retrieval, where it reaches AUROC $0.841$ against $0.719$
+for entropy. When the evidence must be located by the model itself, by causal
+attribution rather than being given, the signal survives but its advantage over
+confidence narrows to nothing at the attribution quality a small model supplies:
+the attributed signal reaches AUROC $0.683$ and no longer beats entropy. The
+matched control is necessary where the intervention has a non-specific component
+(ablation, where it adds AUROC $+0.016$, CI95 $[+0.010, +0.022]$) and inert where
+the intervention is intrinsically specific (a counterfactual swap, $+0.000$), so a
+control matters when there is generic perturbation-sensitivity to cancel. The
 contribution is a new primitive, an experiment rather than a steer, and the
-finding that whether an answer survives intervention on its own evidence is a far
-stronger label-free signal of correctness than how confident the model is.
+finding that whether an answer survives counterfactual intervention on its own
+evidence is a stronger label-free signal of correctness than how confident the
+model is, provided that evidence can be located.
 
 ## 1. Introduction
 
@@ -101,7 +108,11 @@ faithfulness (Kong et al., 2026; Xu et al., 2026). Every one of these applies a
 single intervention.
 The contribution here is the matched control and the answer-agnostic,
 grounding-testing form of the intervention, and the demonstration that the
-resulting signal beats both confidence and a supervised probe.
+resulting signal beats both confidence and a single-pass supervised probe. That
+comparison turns on access rather than on supervision: the experiment is allowed
+several counterfactual forward passes while the probe reads one frozen activation,
+so the gap isolates the value of interventional access and says nothing about
+whether labels carry information.
 
 **Mechanism.** The interventions are activation and token edits of the kind used
 in activation patching and causal tracing (Meng et al., 2022), whose own
@@ -188,13 +199,18 @@ Table 1. Correct-versus-incorrect discrimination on the toy.
 
 The two-experiment controlled mixture separates correct from incorrect answers at
 AUROC $0.956$. It beats negative entropy by a paired CI95 of $[+0.150, +0.191]$
-and logit margin by $[+0.152, +0.192]$. It beats the supervised probe, which uses
-labels, by $[+0.332, +0.377]$: the probe reaches only $0.602$, because a readout
-trained on noisy activations to predict correctness does not generalise, the same
-fragility this construction sidesteps by asking a causal question of the model
-rather than reading a learned feature. Whether an answer survives intervention on
-its own evidence is a much stronger correctness signal than how confident the
-model is in it.
+and logit margin by $[+0.152, +0.192]$. It beats the supervised probe by
+$[+0.332, +0.377]$: the probe reaches only $0.602$. The probe has the advantage of
+labels but the disadvantage of access. It is a single forward pass read off one
+frozen answer-position activation, while each experiment runs three to five
+counterfactual forward passes and measures how the output moves under each. The
+right reading of this gap is therefore not that supervision is useless but that
+interventional access to the model dominates a static readout of it. A readout
+trained on noisy activations to predict correctness does not generalise, and the
+construction sidesteps that fragility by asking a causal question of the model
+rather than reading a learned feature. Whether an answer survives counterfactual
+intervention on its own evidence is a much stronger correctness signal than how
+confident the model is in it.
 
 The mixture grows with the panel. The invariance experiment is a weaker signal on
 its own, AUROC $0.755$, because order-stability is necessary but not sufficient
@@ -254,10 +270,13 @@ run on the attributed token (attribution by ablation, test by swap, so the test
 is not circular). On Pythia-160M this attribution recovers the queried binding on
 $0.488$ of items, against a chance rate of $1/6$. The attributed swap signal
 discriminates correctness at AUROC $0.683$ $[0.625, 0.739]$, well above chance
-but below both the known-evidence swap ($0.757$, a significant gap of
-$[-0.129, -0.020]$) and entropy ($0.719$). The signal survives self-attribution,
-but the margin that lets it beat confidence requires the evidence to be located
-accurately, which a small model supplies only imperfectly. The bottleneck for
+but below the known-evidence swap ($0.757$, a significant gap of
+$[-0.129, -0.020]$). Stated plainly, once the model must locate its own evidence
+rather than being handed it, the signal no longer beats confidence: it falls below
+entropy ($0.719$), and the paired difference from entropy is $[-0.105, +0.030]$, a
+margin that straddles zero. The signal survives self-attribution in the sense that
+it stays above chance, but the advantage over confidence that holds when the
+evidence is given disappears at the attribution quality a small model supplies. The bottleneck for
 generalisation is evidence attribution rather than the experiment itself: where the evidence is
 known the experiment is strong, and self-attribution is the lossy step.
 
@@ -270,8 +289,12 @@ correctness only weakly (AUROC near $0.78$ on the toy, $0.72$ on Pythia). A
 controlled experiment measures something else: whether the answer is a function
 of the evidence it should depend on. A confident wrong answer that does not track
 its evidence is what the experiment exposes and what confidence misses.
-This is why a label-free causal probe beats not only the label-free confidence
-signals but a supervised correctness probe.
+This is also why an interventional probe beats not only the label-free confidence
+signals but a supervised correctness probe. The supervised probe is not beaten
+because labels carry no information. It is beaten because it reads one frozen
+activation in a single pass, while the experiment is allowed several counterfactual
+passes and watches the output move. The decisive variable in the comparison is
+access to the model's response rather than the presence or absence of supervision.
 
 The control is the element that distinguishes an experiment from a perturbation.
 A single intervention conflates two reasons an output might move, that the answer
@@ -296,9 +319,9 @@ panel of independent interrogations of the same claim.
 Two boundaries follow from how the construction is built. The experiments require
 knowing which evidence an answer should depend on. The generalisation result of
 Section 5 makes this concrete and quantifies its cost: when the evidence is found
-by causal leave-one-out rather than given, the signal survives but its advantage
-over confidence erodes in proportion to the attribution quality, which on a small
-model is only $0.488$. For unstructured questions the evidence would have to be
+by causal leave-one-out rather than given, the signal stays above chance but its
+advantage over confidence is spent, falling to AUROC $0.683$ against entropy's
+$0.719$ at an attribution accuracy of only $0.488$. For unstructured questions the evidence would have to be
 identified more reliably, by stronger attribution or by the model's own citation
 of its sources; that identification step is the main obstacle to a general-purpose
 deployment, and the experiment itself is not.
@@ -322,12 +345,19 @@ on, against a matched control, and reads whether the claim survives. The
 control-corrected, aggregated signal discriminates correct from incorrect answers
 with AUROC $0.956$ on a toy with known ground truth and $0.841$ on Pythia-160M,
 in both cases far above the confidence signals (entropy, margin) and above a
-supervised probe. The reason is that grounding and confidence are different
-quantities, and grounding is the one that tracks correctness. The control is what
-makes an intervention an experiment, and it repays its cost when the
-intervention is non-specific. Extending the panel to richer experiment types and
-to settings where the relevant evidence must first be identified is the natural
-continuation.
+single-pass supervised probe. The advantage over the probe is one of access, not
+of supervision: the experiment is granted several counterfactual forward passes
+where the probe reads one frozen activation, so what the comparison shows is that
+interventional access beats static readout. The reason it beats confidence is
+separate, that grounding and confidence are different quantities and grounding is
+the one that tracks correctness. Both advantages depend on knowing which evidence
+an answer should depend on. When that evidence must be found by the model rather
+than given, the advantage over confidence is lost at the attribution quality a
+small model supplies, which makes reliable evidence attribution rather than the
+experiment the obstacle to general deployment. The control is what makes an
+intervention an experiment, and it repays its cost when the intervention is
+non-specific. Extending the panel to richer experiment types and to settings where
+the relevant evidence must first be identified is the natural continuation.
 
 All numeric claims are backed by per-experiment verification records and a claim
 ledger distributed with the paper; the trained toy model and the real-model
